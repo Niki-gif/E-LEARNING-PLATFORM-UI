@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning Platform</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #343a40;
+            line-height: 3;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 1.5em 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            background-color: #e9ecef;
+            padding: 0.75em 0;
+            text-align: center;
+            border-bottom: 1px solid #dee2e6;
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #495057;
+            padding: 0.75em 1.25em;
+            margin: 0 0.75em;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #d3d7db;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+        }
+
+        .course-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .course-card {
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            padding: 20px;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.08);
+        }
+
+        .course-card h3 {
+            margin-top: 0;
+            color: #212529;
+        }
+
+        .progress-container {
+            background-color: #f1f3f5;
+            border-radius: 0.25rem;
+            height: 12px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background-color: #28a745;
+            height: 100%;
+            border-radius: 0.25rem;
+            width: 0%; /* Initial width */
+            transition: width 0.3s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 0.8em;
+        }
+
+        .video-embed-container {
+            margin-top: 25px;
+            border: 1px solid #ced4da;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .video-embed-container iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9; /* Standard video aspect ratio */
+            display: block; /* Prevent extra space below iframe */
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5em 0;
+            background-color: #343a40;
+            color: white;
+            margin-top: 30px;
+        }
+
+        /* Specific styles for different pages (loaded dynamically) */
+        #courses-page .course-list {
+            /* Add specific styling for the courses page if needed */
+        }
+
+        #progress-page .progress-overview {
+            margin-top: 20px;
+        }
+
+        #video-page .video-section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>E-Learning Platform</h1>
+    </header>
+
+    <nav>
+        <a href="#home" data-page="home">Home</a>
+        <a href="#courses" data-page="courses">Courses</a>
+        <a href="#progress" data-page="progress">My Progress</a>
+        <a href="#video" data-page="video">Video Lesson</a>
+    </nav>
+
+    <div class="container" id="page-content">
+        </div>
+
+    <footer>
+        <p>&copy; 2025 E-Learning Platform</p>
+    </footer>
+
+    <script>
+        const navLinks = document.querySelectorAll('nav a');
+        const pageContentDiv = document.getElementById('page-content');
+
+        function loadPage(pageId) {
+            let content = '';
+            switch (pageId) {
+                case 'home':
+                    content = `
+                        <h2>Welcome to our E-Learning Platform!</h2>
+                        <p>Explore a variety of courses and enhance your skills.</p>
+                    `;
+                    break;
+                case 'courses':
+                    content = `
+                        <div id="courses-page">
+                            <h2>Available Courses</h2>
+                            <div class="course-list">
+                                <div class="course-card">
+                                    <h3>Web Development Fundamentals</h3>
+                                    <p>Learn HTML, CSS, and JavaScript basics.</p>
+                                    <div class="progress-container">
+                                        <div class="progress-bar" style="width: 60%;">60%</div>
+                                    </div>
+                                    <button onclick="alert('View Web Development Fundamentals')">View Course</button>
+                                </div>
+                                <div class="course-card">
+                                    <h3>Python for Data Science</h3>
+                                    <p>Master Python for data analysis and visualization.</p>
+                                    <div class="progress-container">
+                                        <div class="progress-bar" style="width: 35%;">35%</div>
+                                    </div>
+                                    <button onclick="alert('View Python for Data Science')">View Course</button>
+                                </div>
+                                <div class="course-card">
+                                    <h3>Digital Marketing Strategies</h3>
+                                    <p>Learn effective online marketing techniques.</p>
+                                    <div class="progress-container">
+                                        <div class="progress-bar" style="width: 80%;">80%</div>
+                                    </div>
+                                    <button onclick="alert('View Digital Marketing Strategies')">View Course</button>
+                                </div>
+                                </div>
+                        </div>
+                    `;
+                    break;
+                case 'progress':
+                    content = `
+                        <div id="progress-page">
+                            <h2>My Learning Progress</h2>
+                            <div class="progress-overview">
+                                <h3>Web Development Fundamentals</h3>
+                                <div class="progress-container">
+                                    <div class="progress-bar" style="width: 60%;">60%</div>
+                                </div>
+                                <h3>Python for Data Science</h3>
+                                <div class="progress-container">
+                                    <div class="progress-bar" style="width: 35%;">35%</div>
+                                </div>
+                                <h3>Digital Marketing Strategies</h3>
+                                <div class="progress-container">
+                                    <div class="progress-bar" style="width: 80%;">80%</div>
+                                </div>
+                                </div>
+                        </div>
+                    `;
+                    break;
+                case 'video':
+                    content = `
+                        <div id="video-page">
+                            <h2>Featured Video Lesson</h2>
+                            <div class="video-embed-container">
+                                <iframe src="https://www.youtube.com/embed/your_video_id" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <p>Watch this introductory lesson to get started.</p>
+                        </div>
+                    `;
+                    break;
+                default:
+                    content = `
+                        <h2>Welcome to our E-Learning Platform!</h2>
+                        <p>Navigate through the links above to explore our courses, track your progress, and watch video lessons.</p>
+                    `;
+            }
+            pageContentDiv.innerHTML = content;
+            document.querySelectorAll('.progress-bar').forEach(bar => {
+                bar.textContent = bar.style.width;
+            });
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const pageId = this.getAttribute('data-page');
+                loadPage(pageId);
+                // Update URL hash for better navigation
+                window.location.hash = pageId;
+            });
+        });
+
+        // Load initial page based on hash or default to home
+        function loadInitialPage() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                loadPage(hash);
+                const activeLink = document.querySelector(`nav a[data-page="${hash}"]`);
+                if (activeLink) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    activeLink.classList.add('active'); // Basic active class (you can style this in CSS)
+                }
+            } else {
+                loadPage('home');
+                navLinks[0].classList.add('active'); // Set Home as active initially
+            }
+        }
+
+        window.onload = loadInitialPage;
+    </script>
+</body>
+</html>
